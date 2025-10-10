@@ -1,4 +1,3 @@
-// import 'package:cooky_app/screens/meal_list_screen.dart';
 import 'package:cooky_app/screens/meal_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -43,126 +42,131 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: provider.isLoading
-            ? const Center(
-                child: CircularProgressIndicator(
-                  color: Colors.deepOrangeAccent,
+      body: provider.isLoading
+          ? const Center(
+              child: CircularProgressIndicator(color: Colors.deepOrangeAccent),
+            )
+          : provider.errorMessage != null
+          ? Center(
+              child: Text(
+                provider.errorMessage!,
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  color: Colors.redAccent,
                 ),
-              )
-            : provider.errorMessage != null
-            ? Center(
-                child: Text(
-                  provider.errorMessage!,
-                  style: GoogleFonts.poppins(
-                    fontSize: 16,
-                    color: Colors.redAccent,
-                  ),
-                ),
-              )
-            : Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // 🍽️ Meal of the Day Section
-                  if (provider.randomMeal != null) ...[
-                    Text(
-                      'Meal of the Day',
-                      style: GoogleFonts.poppins(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.grey[900],
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => MealDetailScreen(
-                              mealId: provider.randomMeal!.id,
-                            ),
+              ),
+            )
+          : CustomScrollView(
+              physics: const BouncingScrollPhysics(),
+              slivers: [
+                SliverPadding(
+                  padding: const EdgeInsets.all(12),
+                  sliver: SliverList(
+                    delegate: SliverChildListDelegate([
+                      // 🍽️ Meal of the Day Section
+                      if (provider.randomMeal != null) ...[
+                        Text(
+                          'Meal of the Day',
+                          style: GoogleFonts.poppins(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.grey[900],
                           ),
-                        );
-                      },
-                      child: Container(
-                        height: 180,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          image: DecorationImage(
-                            image: NetworkImage(provider.randomMeal!.imgaeUrl),
-                            fit: BoxFit.cover,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.15),
-                              blurRadius: 10,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
                         ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            gradient: LinearGradient(
-                              begin: Alignment.bottomCenter,
-                              end: Alignment.topCenter,
-                              colors: [
-                                Colors.black.withOpacity(0.6),
-                                Colors.transparent,
+                        const SizedBox(height: 12),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => MealDetailScreen(
+                                  mealId: provider.randomMeal!.id,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            height: 180,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  provider.randomMeal!.imgaeUrl,
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.15),
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 4),
+                                ),
                               ],
                             ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Align(
-                              alignment: Alignment.bottomLeft,
-                              child: Text(
-                                provider.randomMeal!.name,
-                                style: GoogleFonts.poppins(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16),
+                                gradient: LinearGradient(
+                                  begin: Alignment.bottomCenter,
+                                  end: Alignment.topCenter,
+                                  colors: [
+                                    Colors.black.withOpacity(0.6),
+                                    Colors.transparent,
+                                  ],
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Align(
+                                  alignment: Alignment.bottomLeft,
+                                  child: Text(
+                                    provider.randomMeal!.name,
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
+                        const SizedBox(height: 20),
+                      ],
+                      Text(
+                        'Categories',
+                        style: GoogleFonts.poppins(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.grey[900],
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 20),
-                  ],
-                  // 🍴 Categories Section
-                  Text(
-                    'Categories',
-                    style: GoogleFonts.poppins(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey[900],
-                    ),
+                      const SizedBox(height: 10),
+                    ]),
                   ),
-                  const SizedBox(height: 10),
-                  Expanded(
-                    child: GridView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 12,
-                            mainAxisSpacing: 12,
-                            childAspectRatio: 0.85,
-                          ),
-                      itemCount: provider.categories.length,
-                      itemBuilder: (context, index) {
-                        final category = provider.categories[index];
-                        return CategoryCard(category: category);
-                      },
-                    ),
+                ),
+
+                // 🍴 Category Grid (now scrolls as part of same view)
+                SliverPadding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  sliver: SliverGrid(
+                    delegate: SliverChildBuilderDelegate((context, index) {
+                      final category = provider.categories[index];
+                      return CategoryCard(category: category);
+                    }, childCount: provider.categories.length),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 12,
+                          mainAxisSpacing: 12,
+                          childAspectRatio: 0.85,
+                        ),
                   ),
-                ],
-              ),
-      ),
+                ),
+                const SliverToBoxAdapter(child: SizedBox(height: 20)),
+              ],
+            ),
     );
   }
 }
