@@ -1,16 +1,56 @@
-# cooky_app
+Flutter Recipe App 🍲
 
-A new Flutter project.
+A clean and simple Flutter recipe application that allows users to explore meals from TheMealDB API. Browse by category, search meals by name, and view detailed recipe information.
 
-## Getting Started
+Features
 
-This project is a starting point for a Flutter application.
+Browse meal categories
 
-A few resources to get you started if this is your first Flutter project:
+View meals by selected category
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Search meals by name
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+View detailed meal information
+
+Optionally fetch a random meal
+
+Screens
+
+Home (Category) Screen – Displays all meal categories with images.
+
+Meals List Screen – Shows meals filtered by selected category.
+
+Meal Detail Screen – Detailed view of the selected meal (ingredients, instructions, etc.)
+
+Tech Stack
+
+Flutter – Cross-platform mobile development
+
+Dart – Programming language for Flutter
+
+TheMealDB API – Fetches meals, categories, and details
+
+Provider – State management
+
+Google Fonts – Custom UI typography
+
+Installation
+
+Clone the repository:
+
+git clone <your-repo-link>
+
+
+Navigate to the project folder:
+
+cd flutter_recipe_app
+
+
+Install dependencies:
+
+flutter pub get
+
+
+Run the app on your emulator or device:
+
+flutter run
