@@ -4,6 +4,7 @@ import 'package:cooky_app/providers/meal_provider.dart';
 import 'package:cooky_app/providers/recepie_provider.dart';
 import 'package:cooky_app/providers/search_provider.dart';
 import 'package:cooky_app/screens/main_navigation_screen.dart';
+import 'package:cooky_app/screens/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 // import 'screens/home_screen.dart';
@@ -33,7 +34,7 @@ class RecipeApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Recipe App',
         theme: ThemeData(primarySwatch: Colors.deepOrange),
-        home: const MainNavigationScreen(),
+        home: const OnboardingScreen(),
       ),
     );
   }
